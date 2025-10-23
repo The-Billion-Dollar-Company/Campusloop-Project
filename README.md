@@ -15,8 +15,3 @@ Welcome to **CampusLoop Mobile App**
 
 ### 📫 Connect with Us
 🌐 [Website](#) | 💌 [Contact Us](mailto:mehedihasanshipat4@email.com)
-
-
-
-
-test
