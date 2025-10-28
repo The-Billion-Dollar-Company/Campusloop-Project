@@ -50,30 +50,34 @@ export default function FeaturedItemCard() {
   };
 
   return (
-    <View className="p-6 ">
+    <View className="p-6 bg-campus-pearl">
       {/* Header */}
       <View className="flex-row justify-between items-center mb-4">
-        <Text className="text-title-md text-campus-forest mb-4">
+        <Text className="text-title-md text-campus-forest">
           Featured Items
         </Text>
         <TouchableOpacity onPress={() => router.push("/products")}>
-          <Text className="text-green-600 font-semibold mb-4">See All</Text>
+          <Text className="text-campus-sage font-semibold">See All</Text>
         </TouchableOpacity>
       </View>
 
       {loading ? (
         <View className="py-10 justify-center items-center">
-          <ActivityIndicator size="large" color="#2563eb" />
+          <ActivityIndicator size="large" color="#788881" />
+          <Text className="text-campus-slate mt-4">Loading featured items...</Text>
         </View>
       ) : error ? (
-        <View className="py-10 justify-center items-center">
-          <Ionicons name="alert-circle" size={40} color="#ef4444" />
-          <Text className="text-red-500 mt-2">{error}</Text>
+        <View className="py-10 justify-center items-center px-6">
+          <Ionicons name="alert-circle-outline" size={64} color="#EF4444" />
+          <Text className="text-error text-lg font-semibold mt-4">Error</Text>
+          <Text className="text-campus-slate text-center mt-2">{error}</Text>
         </View>
       ) : products.length === 0 ? (
-        <View className="py-10 justify-center items-center">
-          <Ionicons name="cube-outline" size={40} color="#9ca3af" />
-          <Text className="text-gray-500 mt-2">No featured products</Text>
+        <View className="py-10 justify-center items-center px-6">
+          <Ionicons name="cube-outline" size={64} color="#ABB2B0" />
+          <Text className="text-campus-slate text-center mt-4">
+            No featured products available
+          </Text>
         </View>
       ) : (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -81,11 +85,11 @@ export default function FeaturedItemCard() {
             {products.map((product) => (
               <TouchableOpacity
                 key={product._id}
-                className="bg-white w-[48%] mb-4 rounded-lg overflow-hidden"
+                className="bg-white w-[48%] mb-4 rounded-campus overflow-hidden shadow-campus border border-campus-ash"
                 onPress={() => handleProductPress(product._id)}
               >
                 {/* Image */}
-                <View className="w-full h-32 bg-gray-200">
+                <View className="w-full h-32 bg-campus-ash">
                   {product.picture ? (
                     <Image
                       source={{ uri: product.picture }}
@@ -97,32 +101,28 @@ export default function FeaturedItemCard() {
                       <Ionicons
                         name="image-outline"
                         size={32}
-                        color="#9ca3af"
+                        color="#ABB2B0"
                       />
                     </View>
                   )}
                 </View>
 
                 {/* Info */}
-                <View className="p-2 flex flex-row items-start justify-between">
-                  <View>
-                    <Text
-                      className="text-sm font-semibold text-gray-900"
-                      numberOfLines={1}
-                    >
-                      {product.title.length > 17
-                        ? product.title.slice(0, 17) + "..."
-                        : product.title}
-                    </Text>
-                    <Text className="text-xs text-gray-500" numberOfLines={1}>
-                      {product.objectCategory || "General"}
-                    </Text>
-                  </View>
-                  <View className="">
-                    <Text className="text-base font-bold text-green-600 mt-1">
-                      ${product.price}
-                    </Text>
-                  </View>
+                <View className="p-3">
+                  <Text
+                    className="text-body-md font-semibold text-campus-forest mb-1"
+                    numberOfLines={1}
+                  >
+                    {product.title.length > 17
+                      ? product.title.slice(0, 17) + "..."
+                      : product.title}
+                  </Text>
+                  <Text className="text-label-md text-campus-slate mb-2" numberOfLines={1}>
+                    {product.objectCategory || "General"}
+                  </Text>
+                  <Text className="text-title-sm font-bold text-campus-forest">
+                    ${product.price}
+                  </Text>
                 </View>
               </TouchableOpacity>
             ))}

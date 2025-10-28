@@ -13,7 +13,7 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { publicAPI } from "@/lib/api";
 import { Ionicons } from "@expo/vector-icons";
-import { useUser } from "@/Context/UserContext";  
+import { useUser } from "@/Context/UserContext";
 
 
 const { width } = Dimensions.get("window");
@@ -59,49 +59,59 @@ export default function ProductDetailScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#2563eb" />
+      <View className="flex-1 justify-center items-center bg-campus-pearl">
+        <ActivityIndicator size="large" color="#788881" />
+        <Text className="text-campus-slate mt-4">Loading product details...</Text>
       </View>
     );
   }
 
   if (error) {
     return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <Ionicons name="alert-circle" size={64} color="#ef4444" />
-        <Text className="text-red-500 mt-3 text-base">{error}</Text>
+      <View className="flex-1 justify-center items-center bg-campus-pearl px-6">
+        <Ionicons name="alert-circle-outline" size={64} color="#EF4444" />
+        <Text className="text-error text-lg font-semibold mt-4">Error</Text>
+        <Text className="text-campus-slate text-center mt-2">{error}</Text>
+        <TouchableOpacity
+          className="bg-campus-sage rounded-campus py-3 px-6 mt-6"
+          onPress={fetchProductDetails}
+        >
+          <Text className="text-white font-semibold">Retry</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
   if (!product) {
     return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <Ionicons name="cube-outline" size={64} color="#9ca3af" />
-        <Text className="text-gray-500 mt-4 text-lg">Product not found</Text>
+      <View className="flex-1 justify-center items-center bg-campus-pearl px-6">
+        <Ionicons name="cube-outline" size={64} color="#ABB2B0" />
+        <Text className="text-campus-slate text-center mt-4">
+          Product not found
+        </Text>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-campus-pearl">
       {/* HEADER */}
-      <View className="pt-12 pb-4 px-4 bg-white border-b border-gray-200 flex-row items-center">
+      <View className="bg-campus-forest px-6 py-4 pt-12 pb-6 flex-row items-center">
         <TouchableOpacity onPress={() => router.back()} className="mr-3">
-          <Ionicons name="arrow-back" size={26} color="#111" />
+          <Ionicons name="arrow-back" size={26} color="white" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-gray-900 flex-1">
+        <Text className="text-xl font-bold text-white flex-1">
           Product Details
         </Text>
         <TouchableOpacity>
-          <Ionicons name="share-outline" size={24} color="#111" />
+          <Ionicons name="share-outline" size={24} color="white" />
         </TouchableOpacity>
       </View>
 
       {/* CONTENT */}
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* IMAGE */}
-        <View className="bg-white shadow-sm">
+        <View className="bg-white shadow-campus mx-4 mt-4 rounded-campus overflow-hidden">
           <Image
             source={{ uri: product.picture }}
             style={{ width: "100%", height: 380 }}
@@ -110,33 +120,33 @@ export default function ProductDetailScreen() {
         </View>
 
         {/* PRODUCT INFO */}
-        <View className="bg-white px-4 py-5 mt-2 rounded-t-2xl shadow-sm">
-          <Text className="text-2xl font-bold text-gray-900 mb-1">
+        <View className="bg-white mx-4 mt-4 rounded-campus shadow-campus px-6 py-6">
+          <Text className="text-title-lg text-campus-forest mb-2">
             {product.title}
           </Text>
-          <Text className="text-gray-700 text-3xl font-bold mb-4">
+          <Text className="text-headline-sm font-bold text-campus-forest mb-4">
             ${product.price}
           </Text>
 
           {/* Tags */}
           <View className="flex-row flex-wrap mb-4">
             {product.objectCategory && (
-              <View className="bg-blue-100 px-3 py-1.5 rounded-full mr-2 mb-2">
-                <Text className="text-blue-700 font-medium text-sm">
+              <View className="bg-campus-mint px-3 py-1.5 rounded-campus mr-2 mb-2">
+                <Text className="text-campus-forest font-medium text-label-md">
                   {product.objectCategory}
                 </Text>
               </View>
             )}
             {product.condition && (
-              <View className="bg-purple-100 px-3 py-1.5 rounded-full mr-2 mb-2">
-                <Text className="text-purple-700 font-medium text-sm">
+              <View className="bg-campus-ash px-3 py-1.5 rounded-campus mr-2 mb-2">
+                <Text className="text-campus-slate font-medium text-label-md">
                   {product.condition}
                 </Text>
               </View>
             )}
             {product.sellingCategory && (
-              <View className="bg-green-100 px-3 py-1.5 rounded-full mr-2 mb-2">
-                <Text className="text-green-700 font-medium text-sm">
+              <View className="bg-campus-sage px-3 py-1.5 rounded-campus mr-2 mb-2">
+                <Text className="text-white font-medium text-label-md">
                   {product.sellingCategory}
                 </Text>
               </View>
@@ -144,29 +154,29 @@ export default function ProductDetailScreen() {
           </View>
 
           {/* Description */}
-          <Text className="text-lg font-semibold text-gray-900 mb-2">
+          <Text className="text-title-md text-campus-forest mb-2">
             Description
           </Text>
-          <Text className="text-gray-600 leading-6 mb-5">
+          <Text className="text-body-md text-campus-slate leading-6 mb-6">
             {product.description || "No description available."}
           </Text>
 
           {/* Seller Info */}
-          <View className="border-t border-gray-100 pt-4">
-            <Text className="text-lg font-semibold text-gray-900 mb-3">
+          <View className="border-t border-campus-ash pt-4">
+            <Text className="text-title-md text-campus-forest mb-3">
               Seller Information
             </Text>
             <View className="flex-row items-center">
-              <View className="w-12 h-12 bg-green-600 rounded-full items-center justify-center">
+              <View className="w-12 h-12 bg-campus-sage rounded-full items-center justify-center">
                 <Text className="text-white font-bold text-lg">
                   {product.ownerId?.name?.[0]?.toUpperCase() || "U"}
                 </Text>
               </View>
               <View className="ml-3">
-                <Text className="text-base font-semibold text-gray-900">
+                <Text className="text-body-md font-semibold text-campus-forest">
                   {product.ownerId?.name || "Unknown Seller"}
                 </Text>
-                <Text className="text-sm text-gray-600">
+                <Text className="text-label-md text-campus-slate">
                   {product.ownerId?.email}
                 </Text>
               </View>
@@ -176,32 +186,32 @@ export default function ProductDetailScreen() {
       </ScrollView>
 
       {/* ACTION BAR */}
-      <View className="flex-row bg-white border-t border-gray-200 px-4 py-4 gap-3">
+      <View className="flex-row bg-white border-t border-campus-ash px-4 py-4 gap-3 mx-4 mb-4 rounded-campus">
         <TouchableOpacity
-          className="flex-1 bg-gray-100 py-4 rounded-xl flex-row justify-center items-center"
+          className="flex-1 bg-campus-ash py-4 rounded-campus flex-row justify-center items-center"
           onPress={handleContactSeller}
         >
-          <Ionicons name="chatbubble-ellipses" size={20} color="#43A047" />
-          <Text className="text-green-600 font-bold text-md ml-1">Contact</Text>
+          <Ionicons name="chatbubble-ellipses" size={20} color="#2D473E" />
+          <Text className="text-campus-forest font-bold text-body-md ml-1">Contact</Text>
         </TouchableOpacity>
 
         {product.sellingCategory === "SELL" ? (
           <TouchableOpacity
-            className="flex-1 bg-blue-600 py-2 rounded-xl flex-row justify-center items-center"
+            className="flex-1 bg-campus-forest py-4 rounded-campus flex-row justify-center items-center"
             onPress={handleAddToCart}
           >
-            <Ionicons name="cart-outline" size={20} color="#fff" />
-            <Text className="text-white font-bold text-md ml-1">
+            <Ionicons name="cart-outline" size={20} color="white" />
+            <Text className="text-white font-bold text-body-md ml-1">
               Add to Cart
             </Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
-            className="flex-1 bg-green-600 py-4 rounded-xl flex-row justify-center items-center"
+            className="flex-1 bg-campus-sage py-4 rounded-campus flex-row justify-center items-center"
             onPress={handleRentNow}
           >
-            <Ionicons name="cash-outline" size={20} color="#fff" />
-            <Text className="text-white font-bold text-md ml-1">Rent Now</Text>
+            <Ionicons name="cash-outline" size={20} color="white" />
+            <Text className="text-white font-bold text-body-md ml-1">Rent Now</Text>
           </TouchableOpacity>
         )}
       </View>
