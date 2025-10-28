@@ -16,7 +16,7 @@ const Events = () => {
       <View className="bg-white px-4 pt-8 pb-3 shadow-sm">
         {/* Top Bar */}
         <View className="flex-row items-center justify-between mb-3 relative">
-          <Text className="absolute left-1/2 -translate-x-1/2 text-3xl font-semibold text-[#2D473E]">
+          <Text className="absolute left-1/2 -translate-x-1/2 text-3xl font-semibold bg-campus-forest text-white">
             Events
           </Text>
           <TouchableOpacity className="p-1 ml-auto">
@@ -38,131 +38,194 @@ const Events = () => {
 
       {/* Scrollable Cards */}
       <ScrollView className="flex-1 px-4 pt-4" showsVerticalScrollIndicator={true}>
+
         {/* Card 1 */}
         <View className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-5">
           <Image
-            source={require("../../assets/images/Resistor.jpg")}
+            source={require("../../assets/images/bubt-hackathon.jpg")}
             className="h-40 w-full rounded-xl mb-3"
             resizeMode="cover"
           />
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900">Resistor</Text>
-            <Text className="text-sm text-gray-500">28 Oct 2025, 10:00 AM</Text>
+
+          {/* Title and Date */}
+          <View className="flex-row items-center justify-between mb-2">
+            <Text className="text-lg font-semibold text-gray-900">
+            InnovateX National Hackathon 2025
+            </Text>
+            <Text className="text-sm text-gray-500">8 Oct 2025</Text>
           </View>
-          <View className="flex-row flex-wrap gap-2">
+
+          {/* Tags */}
+          <View className="flex-row flex-wrap gap-2 mb-3">
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#electronics</Text>
+              <Text className="text-sm text-gray-700">#Workshop</Text>
             </View>
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#resistance</Text>
+              <Text className="text-sm text-gray-700">#AI</Text>
+            </View>
+            <View className="bg-gray-100 px-3 py-1 rounded-lg">
+              <Text className="text-sm text-gray-700">#Education</Text>
             </View>
           </View>
+
+          {/* Button */}
+          <TouchableOpacity className="bg-[#2D473E] py-2 rounded-full items-center">
+            <Text className="text-white font-semibold text-base">View Event</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Card 2 */}
         <View className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-5">
           <Image
-            source={require("../../assets/images/Capacitor.jpg")}
+            source={require("../../assets/images/Programming-Camp-bubt.jpg")}
             className="h-40 w-full rounded-xl mb-3"
             resizeMode="cover"
           />
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900">Capacitor</Text>
-            <Text className="text-sm text-gray-500">29 Oct 2025, 3:00 PM</Text>
+
+          <View className="flex-row items-center justify-between mb-2">
+            <Text className="text-lg font-semibold text-gray-900">
+            BAPS National Programming Camp 2025
+            </Text>
+            <Text className="text-sm text-gray-500">15 July 2025</Text>
           </View>
-          <View className="flex-row flex-wrap gap-2">
+
+          <View className="flex-row flex-wrap gap-2 mb-3">
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#charge</Text>
+              <Text className="text-sm text-gray-700">#Music</Text>
             </View>
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#storage</Text>
+              <Text className="text-sm text-gray-700">#Festival</Text>
+            </View>
+            <View className="bg-gray-100 px-3 py-1 rounded-lg">
+              <Text className="text-sm text-gray-700">#Cultural</Text>
             </View>
           </View>
+
+          <TouchableOpacity className="bg-[#2D473E] py-2 rounded-full items-center">
+            <Text className="text-white font-semibold text-base">View Event</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Card 3 */}
         <View className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-5">
           <Image
-            source={require("../../assets/images/Diode.jpg")}
+            source={require("../../assets/images/May-day-2025.jpg")}
             className="h-40 w-full rounded-xl mb-3"
             resizeMode="cover"
           />
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900">Diode</Text>
-            <Text className="text-sm text-gray-500">30 Oct 2025, 5:30 PM</Text>
+
+          <View className="flex-row items-center justify-between mb-2">
+            <Text className="text-lg font-semibold text-gray-900">Labor Day-2025</Text>
+            <Text className="text-sm text-gray-500">1 May 2025</Text>
           </View>
-          <View className="flex-row flex-wrap gap-2">
+
+          <View className="flex-row flex-wrap gap-2 mb-3">
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#semiconductor</Text>
+              <Text className="text-sm text-gray-700">#Sports</Text>
             </View>
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#current</Text>
+              <Text className="text-sm text-gray-700">#Marathon</Text>
+            </View>
+            <View className="bg-gray-100 px-3 py-1 rounded-lg">
+              <Text className="text-sm text-gray-700">#Health</Text>
             </View>
           </View>
+
+          <TouchableOpacity className="bg-[#2D473E] py-2 rounded-full items-center">
+            <Text className="text-white font-semibold text-base">View Event</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Card 4 */}
         <View className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-5">
           <Image
-            source={require("../../assets/images/Transistor.jpg")}
+            source={require("../../assets/images/noboborsho-2025.jpg")}
             className="h-40 w-full rounded-xl mb-3"
             resizeMode="cover"
           />
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900">Transistor</Text>
-            <Text className="text-sm text-gray-500">31 Oct 2025, 11:15 AM</Text>
+
+          <View className="flex-row items-center justify-between mb-2">
+            <Text className="text-lg font-semibold text-gray-900">Pohela Boishakh 2025</Text>
+            <Text className="text-sm text-gray-500">15 April 2025</Text>
           </View>
-          <View className="flex-row flex-wrap gap-2">
+
+          <View className="flex-row flex-wrap gap-2 mb-3">
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#amplifier</Text>
+              <Text className="text-sm text-gray-700">#Corporate</Text>
             </View>
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#switch</Text>
+              <Text className="text-sm text-gray-700">#Launch</Text>
+            </View>
+            <View className="bg-gray-100 px-3 py-1 rounded-lg">
+              <Text className="text-sm text-gray-700">#Business</Text>
             </View>
           </View>
+
+          <TouchableOpacity className="bg-[#2D473E] py-2 rounded-full items-center">
+            <Text className="text-white font-semibold text-base">View Event</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Card 5 */}
         <View className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-5">
           <Image
-            source={require("../../assets/images/Inductor.jpg")}
+            source={require("../../assets/images/Pitha-utsop.jpg")}
             className="h-40 w-full rounded-xl mb-3"
             resizeMode="cover"
           />
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900">Inductor</Text>
-            <Text className="text-sm text-gray-500">1 Nov 2025, 9:00 AM</Text>
+
+          <View className="flex-row items-center justify-between mb-2">
+            <Text className="text-lg font-semibold text-gray-900">Pitha Utshop-2025</Text>
+            <Text className="text-sm text-gray-500">18 April 2025</Text>
           </View>
-          <View className="flex-row flex-wrap gap-2">
+
+          <View className="flex-row flex-wrap gap-2 mb-3">
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#coil</Text>
+              <Text className="text-sm text-gray-700">#Birthday</Text>
             </View>
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#magnetic</Text>
+              <Text className="text-sm text-gray-700">#Party</Text>
+            </View>
+            <View className="bg-gray-100 px-3 py-1 rounded-lg">
+              <Text className="text-sm text-gray-700">#Personal</Text>
             </View>
           </View>
+
+          <TouchableOpacity className="bg-[#2D473E] py-2 rounded-full items-center">
+            <Text className="text-white font-semibold text-base">View Event</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Card 6 */}
         <View className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-5">
           <Image
-            source={require("../../assets/images/LED Light.jpg")}
+            source={require("../../assets/images/convocation.jpg")}
             className="h-40 w-full rounded-xl mb-3"
             resizeMode="cover"
           />
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-lg font-semibold text-gray-900">LED Light</Text>
-            <Text className="text-sm text-gray-500">2 Nov 2025, 7:45 PM</Text>
+
+          <View className="flex-row items-center justify-between mb-2">
+            <Text className="text-lg font-semibold text-gray-900">6th Convocation-2025</Text>
+            <Text className="text-sm text-gray-500">26 Feb 2025</Text>
           </View>
-          <View className="flex-row flex-wrap gap-2">
+
+          <View className="flex-row flex-wrap gap-2 mb-3">
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#light</Text>
+              <Text className="text-sm text-gray-700">#Charity</Text>
             </View>
             <View className="bg-gray-100 px-3 py-1 rounded-lg">
-              <Text className="text-sm text-gray-700">#energy</Text>
+              <Text className="text-sm text-gray-700">#Community</Text>
+            </View>
+            <View className="bg-gray-100 px-3 py-1 rounded-lg">
+              <Text className="text-sm text-gray-700">#Social</Text>
             </View>
           </View>
+
+          <TouchableOpacity className="bg-[#2D473E] py-2 rounded-full items-center">
+            <Text className="text-white font-semibold text-base">View Event</Text>
+          </TouchableOpacity>
         </View>
+
       </ScrollView>
     </View>
   );
