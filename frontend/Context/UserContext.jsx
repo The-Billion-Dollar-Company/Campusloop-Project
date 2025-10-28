@@ -36,6 +36,9 @@ export const UserProvider = ({ children }) => {
 
       const response = await privateAPI.get('/user/me');
       // console.log(response)
+        // console.log(response)
+        // console.log(response.data)
+
 
       if (response.data.success) {
         setUser(response.data.data);
