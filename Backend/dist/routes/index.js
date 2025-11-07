@@ -6,6 +6,7 @@ const user_route_1 = require("../modules/user/user.route");
 const auth_route_1 = require("../modules/auth/auth.route");
 const item_route_1 = require("../modules/item/item.route");
 const rental_route_1 = require("../modules/rental/rental.route");
+const admin_route_1 = require("../modules/admin/admin.route");
 exports.router = (0, express_1.Router)();
 const moduleRoutes = [
     {
@@ -20,6 +21,9 @@ const moduleRoutes = [
     }, {
         path: '/rent',
         route: rental_route_1.RentRoutes
+    }, {
+        path: '/admin',
+        route: admin_route_1.AdminRoutes
     }
 ];
 moduleRoutes.forEach((route) => {

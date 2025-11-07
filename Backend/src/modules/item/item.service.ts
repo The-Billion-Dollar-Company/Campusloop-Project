@@ -63,15 +63,15 @@ const allItem = async (query: QueryParams) => {
   }
 
   if (category) {
-    filters.objectCategory = category;
+    filters.objectCategory = category.toUpperCase();
   }
 
   if(sellingCategory){
-    filters.sellingCategory = sellingCategory;
+    filters.sellingCategory = sellingCategory.toUpperCase();
   }
 
   if(availability){
-    filters.availability = availability;
+    filters.availability = availability.toUpperCase();
   }
 
   if(minPrice || maxPrice){
@@ -79,6 +79,8 @@ const allItem = async (query: QueryParams) => {
     if(minPrice) filters.price.$gte = Number(minPrice)
     if(maxPrice) filters.price.$lte = Number(maxPrice)
   }
+
+  filters.status = "PUBLISHED"
 
   const pageNum = parseInt(page);
   const limitNum = parseInt(limit);

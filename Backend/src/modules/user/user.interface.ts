@@ -34,7 +34,15 @@ export interface IUser{
 }
 
 
-
+export interface UserQueryParams {
+  search?: string;
+  role?: Role;
+  status?: Status;
+  page?: string;
+  limit?: string;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
+}
 
 
 

@@ -17,14 +17,31 @@ const sendResponse_1 = require("../../utils/sendResponse");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const catchAsync_1 = require("../../utils/catchAsync");
 const item_service_1 = require("./item.service");
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const fileUpload_1 = require("../../helper/fileUpload");
 const createItem = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.user.userId;
-    const item = yield item_service_1.ItemServices.createItem(req.body, userId);
+    const file = req.file;
+    let imageUrl;
+    if (file) {
+        const result = yield fileUpload_1.fileUploader.uploadToCloudinary(file);
+        imageUrl = result.secure_url;
+    }
+    let data = req.body;
+    try {
+        if (req.body.data)
+            data = JSON.parse(req.body.data);
+    }
+    catch (err) {
+        throw new AppError_1.default(http_status_codes_1.default.BAD_REQUEST, "Invalid JSON body");
+    }
+    const itemData = Object.assign(Object.assign({}, data), { ownerId: userId, picture: imageUrl });
+    const item = yield item_service_1.ItemServices.createItem(itemData, userId);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_codes_1.default.CREATED,
         message: "Item Created Successfully",
-        data: item
+        data: item,
     });
 }));
 const allItem = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -35,7 +52,7 @@ const allItem = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, voi
         statusCode: http_status_codes_1.default.OK,
         message: "All Items retrieve successfully",
         data: items.data,
-        meta: items.meta
+        meta: items.meta,
     });
 }));
 const itemById = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,10 +89,22 @@ const deleteItem = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, 
         data: id,
     });
 }));
+const toggleStatus = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { status } = req.body;
+    const updatedItem = yield item_service_1.ItemServices.toggleStatus(id, status);
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: "Item updated successfully",
+        data: updatedItem,
+    });
+}));
 exports.ItemControllers = {
     createItem,
     allItem,
     itemById,
     deleteItem,
-    updateItem
+    updateItem,
+    toggleStatus
 };

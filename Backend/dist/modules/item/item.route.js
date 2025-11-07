@@ -5,10 +5,13 @@ const express_1 = require("express");
 const user_interface_1 = require("../user/user.interface");
 const item_controller_1 = require("./item.controller");
 const checkAuth_1 = require("../../middlewares/checkAuth");
+const fileUpload_1 = require("../../helper/fileUpload");
 const router = (0, express_1.Router)();
-router.post('/', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), item_controller_1.ItemControllers.createItem);
+router.post('/', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), fileUpload_1.fileUploader.upload.single("image"), item_controller_1.ItemControllers.createItem);
 router.get('/', item_controller_1.ItemControllers.allItem);
 router.get('/:id', item_controller_1.ItemControllers.itemById);
 router.patch('/:id', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), item_controller_1.ItemControllers.updateItem);
 router.delete('/:id', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), item_controller_1.ItemControllers.deleteItem);
+// ADMIN-->
+router.patch('/:id/status', (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), item_controller_1.ItemControllers.toggleStatus);
 exports.ItemRoutes = router;

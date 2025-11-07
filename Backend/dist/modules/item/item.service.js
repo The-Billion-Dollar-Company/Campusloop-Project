@@ -18,7 +18,6 @@ const item_model_1 = require("./item.model");
 const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
 const user_model_1 = require("../user/user.model");
 const createItem = (payload, userId) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     // Basic validation
     if (!payload.ownerId ||
         !payload.title ||
@@ -37,7 +36,7 @@ const createItem = (payload, userId) => __awaiter(void 0, void 0, void 0, functi
     }
     const item = yield item_model_1.Item.create(payload);
     user.items = user.items || []; // ensure array exists
-    (_a = user === null || user === void 0 ? void 0 : user.items) === null || _a === void 0 ? void 0 : _a.push(item._id);
+    user.items.push(item._id);
     yield user.save();
     yield item.populate("ownerId", "name");
     return item;
@@ -51,13 +50,13 @@ const allItem = (query) => __awaiter(void 0, void 0, void 0, function* () {
         filters.$or = [{ title: { $regex: search, $options: "i" } }];
     }
     if (category) {
-        filters.objectCategory = category;
+        filters.objectCategory = category.toUpperCase();
     }
     if (sellingCategory) {
-        filters.sellingCategory = sellingCategory;
+        filters.sellingCategory = sellingCategory.toUpperCase();
     }
     if (availability) {
-        filters.availability = availability;
+        filters.availability = availability.toUpperCase();
     }
     if (minPrice || maxPrice) {
         filters.price = {};
@@ -66,6 +65,7 @@ const allItem = (query) => __awaiter(void 0, void 0, void 0, function* () {
         if (maxPrice)
             filters.price.$lte = Number(maxPrice);
     }
+    filters.status = "PUBLISHED";
     const pageNum = parseInt(page);
     const limitNum = parseInt(limit);
     const skip = (pageNum - 1) * limitNum;
@@ -107,6 +107,21 @@ const updateItem = (id, userId, payload) => __awaiter(void 0, void 0, void 0, fu
     // runValidator = update korar time e Item Schema check kore update krbe.
     return updateItem;
 });
+const toggleStatus = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
+    const item = yield item_model_1.Item.findById(id);
+    if (!item) {
+        throw new AppError_1.default(http_status_codes_1.default.NOT_FOUND, "Item not found");
+    }
+    item.status = status;
+    item.save();
+    // const updateItem = await Item.findByIdAndUpdate(id, status, {
+    //   new: true,
+    //   runValidators: true,
+    // });
+    // new = true, noton document return krbe(bydefault update krle prev document return kore)
+    // runValidator = update korar time e Item Schema check kore update krbe.
+    return item;
+});
 const deleteItem = (userId, id) => __awaiter(void 0, void 0, void 0, function* () {
     const item = yield item_model_1.Item.findById(id);
     if (!item) {
@@ -125,4 +140,5 @@ exports.ItemServices = {
     itemById,
     updateItem,
     deleteItem,
+    toggleStatus
 };
