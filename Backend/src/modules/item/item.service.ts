@@ -1,8 +1,9 @@
 import httpStatus from "http-status-codes";
-import { IItem, QueryParams } from "./Item.interface";
+import { IItem, ItemStatus, QueryParams } from "./Item.interface";
 import { Item } from "./item.model";
 import AppError from "../../errorHelpers/AppError";
 import { User } from "../user/user.model";
+import { Status } from "../user/user.interface";
 
 const createItem = async (payload: Partial<IItem>, userId: string) => {
   // Basic validation
@@ -35,7 +36,7 @@ const createItem = async (payload: Partial<IItem>, userId: string) => {
   const item = await Item.create(payload);
   user.items = user.items || []; // ensure array exists
 
-  user?.items?.push(item._id);
+  user.items.push(item._id);
   await user.save();
   await item.populate("ownerId", "name");
   return item;
@@ -143,6 +144,29 @@ const updateItem = async (
   return updateItem;
 };
 
+const toggleStatus = async (
+  id: string,
+  status: ItemStatus
+) => {
+  const item = await Item.findById(id);
+
+  if (!item) {
+    throw new AppError(httpStatus.NOT_FOUND, "Item not found");
+  }
+
+  item.status = status
+  item.save()
+
+  // const updateItem = await Item.findByIdAndUpdate(id, status, {
+  //   new: true,
+  //   runValidators: true,
+  // });
+  // new = true, noton document return krbe(bydefault update krle prev document return kore)
+  // runValidator = update korar time e Item Schema check kore update krbe.
+
+  return item;
+};
+
 const deleteItem = async (userId: string, id: string) => {
   const item = await Item.findById(id);
   if (!item) {
@@ -168,4 +192,5 @@ export const ItemServices = {
   itemById,
   updateItem,
   deleteItem,
+  toggleStatus
 };
