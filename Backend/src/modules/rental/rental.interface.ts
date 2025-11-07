@@ -1,12 +1,14 @@
 import { Types } from "mongoose";
 
 export enum RentalStatus {
-  REQUESTED = "REQUESTED",
-  ACCEPTED = "ACCEPTED", // owner accept for rent
+  REQUESTED = "REQUESTED", // by default --> auto
+  
   REJECTED = "REJECTED", // owner reject for rent
+  ONGOING = "ONGOING", // owner accept for renting is ongoing
+
   CANCELLED = "CANCELLED", // renter cancel the request
-  ONGOING = "ONGOING", // renting is ongoing
-  RETURNED = "RETURNED", // renter return the item
+
+  RETURNED = "RETURNED", // renter return the item--> auto
 }
 
 export interface IRental {

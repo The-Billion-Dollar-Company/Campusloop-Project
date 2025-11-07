@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RentRoutes = void 0;
+const express_1 = require("express");
+const user_interface_1 = require("../user/user.interface");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const rental_controller_1 = require("./rental.controller");
+const router = (0, express_1.Router)();
+router.post('/', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), rental_controller_1.RentalController.createRental);
+router.get('/', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), rental_controller_1.RentalController.allRentals);
+router.get('/:id', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), rental_controller_1.RentalController.rentalInfoById);
+router.patch('/:id/status', (0, checkAuth_1.checkAuth)(user_interface_1.Role.BUYER, user_interface_1.Role.SELLER), rental_controller_1.RentalController.updateRentalStatus);
+router.delete('/:id', (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), rental_controller_1.RentalController.deleteRental);
+exports.RentRoutes = router;

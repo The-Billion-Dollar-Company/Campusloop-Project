@@ -62,7 +62,6 @@ export interface IItem {
   pictures?: string[];    // multiple images
 }
 
-
 export interface QueryParams {
   search?: string;
   category?: string;
