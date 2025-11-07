@@ -1,11 +1,17 @@
 import { model, Schema, Types } from "mongoose";
-import { IItem, ItemCategory, Availability, ObjectCategory } from "./Item.interface";
+import {
+  IItem,
+  ItemCategory,
+  Availability,
+  ObjectCategory,
+  ItemStatus,
+} from "./Item.interface";
 
 const itemSchema = new Schema<IItem>(
   {
     ownerId: {
       type: Schema.Types.ObjectId,
-      ref: "User", 
+      ref: "User",
       required: true,
     },
     title: {
@@ -30,7 +36,6 @@ const itemSchema = new Schema<IItem>(
       type: String,
       enum: ["NEW", "USED"],
     },
-
     sellingCategory: {
       type: String,
       enum: Object.values(ItemCategory),
@@ -40,6 +45,11 @@ const itemSchema = new Schema<IItem>(
       type: String,
       enum: Object.values(Availability),
       default: Availability.IN_STOCK,
+    },
+    status: {
+      type: String,
+      enum: Object.values(ItemStatus),
+      default: ItemStatus.PENDING,
     },
     objectCategory: {
       type: String,

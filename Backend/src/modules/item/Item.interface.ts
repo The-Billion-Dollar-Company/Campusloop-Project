@@ -37,6 +37,11 @@ export enum ObjectCategory {
   OTHERS = "OTHERS",                 // Anything not listed above
 }
 
+export enum ItemStatus{
+    PENDING="PENDING",
+    PUBLISHED="PUBLISHED",
+    CANCEL="CANCEL",
+}
 
 export interface IItem {
   _id?: Types.ObjectId;
@@ -44,9 +49,10 @@ export interface IItem {
   title: string;
   description?: string;  
   price: number;
-  deposit?: number;       // eta nite hole buyer ke koto deposite korte hbe
+  deposit?: number;       
   condition?: "NEW" | "USED"; 
-
+  
+  status: ItemStatus,
   sellingCategory: ItemCategory; // RENT | SELL | SKILL
   availability: Availability;    // IN_STOCK | RENTED | SOLD
   objectCategory: ObjectCategory; // one of the listed categories
@@ -65,6 +71,7 @@ export interface QueryParams {
   minPrice?: string;
   maxPrice?: string;
   sortBy?: string;
+  status?: string;
   sortOrder?: "asc" | "desc";
   page?: string;
   limit?: string;
