@@ -1,0 +1,41 @@
+import { Types } from "mongoose";
+
+export enum Role{
+    SUPER_ADMIN="SUPER_ADMIN",
+    ADMIN="ADMIN",
+    SELLER="SELLER",
+    BUYER="BUYER"
+}
+
+export enum Status{
+    PENDING="PENDING",
+    ACTIVE="ACTIVE",
+    SUSPEND="SUSPEND",
+}
+
+
+export interface IUser{
+    _id?: Types.ObjectId,
+    name: string,
+    email: string,
+    password: string,
+    
+    universityId?: string,
+    phone?: string,
+    presentAddress?: string,
+    picture?: string,
+    activeRole?: Role,
+    isVerified?: boolean, //verify after email verification
+    isStatus?: Status,
+    transactions?: Types.ObjectId[],
+    wallet?: Types.ObjectId, 
+    items?: Types.ObjectId[], // jei product gula se post krbe
+    rentals?: Types.ObjectId[] // jei product gula se rent nibe or kinbe
+}
+
+
+
+
+
+
+

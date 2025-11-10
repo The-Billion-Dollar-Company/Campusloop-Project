@@ -3,9 +3,7 @@ import React from 'react'
 
 const events = () => {
   return (
-    <View>
-      <Text>events</Text>
-    </View>
+    <EventCard />
   )
 }
 

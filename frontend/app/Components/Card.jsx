@@ -48,7 +48,7 @@ const Card = () => {
         </View>
 
         {/* Button */}
-        <TouchableOpacity className="bg-green-600 mt-3 py-2 rounded">
+        <TouchableOpacity className="bg-campus-green mt-3 py-2 rounded">
           <Text className="text-center text-white font-semibold">
             View Details
           </Text>

@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import "nativewind";
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import "../global.css";
+import FeaturedItemCard from '../Components/Home/FeaturedItemsCard';
 
 export default function Home() {
   return (
@@ -31,10 +32,10 @@ export default function Home() {
       </View>
 
       {/* Content outside the green header */}
-      <View className="px-6 py-6">
+      <View className="px-6 pt-5">
         {/* Categories Marquee */}
         <View className="mb-8">
-          <Text className="text-title-lg text-campus-forest mb-4 ">
+          <Text className="text-title-md text-campus-forest mb-4 ">
             Categories
           </Text>
           <ScrollView
@@ -76,6 +77,10 @@ export default function Home() {
 
 
 
+      </View>
+
+      <View className='flex-1 '>
+        <FeaturedItemCard />
       </View>
     </ScrollView>
   );
