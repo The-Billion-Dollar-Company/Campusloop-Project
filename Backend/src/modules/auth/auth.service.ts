@@ -56,7 +56,7 @@ const createUser = async (payload: Partial<IUser>) => {
   const finalUser = await User.findById(user._id).populate("wallet").lean(); //.lean returns plain object instead of mongoose document instance
 
   if (finalUser) {
-    delete (finalUser as any).password;
+    delete (finalUser as any).password; // temporary delete
   }
 
   return finalUser;
@@ -91,6 +91,8 @@ const credentialLogin = async (payload: Partial<IUser>) => {
     user: res,
   };
 };
+
+
 
 
 export const AuthServices = {

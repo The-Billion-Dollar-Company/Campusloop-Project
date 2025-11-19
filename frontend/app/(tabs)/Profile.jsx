@@ -156,7 +156,7 @@ const Profile = () => {
       </View>
 
       {/* Tab Content */}
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1">
         {activeTab === "rent" ? <MyRental /> : <MyListing />}
       </View>
     </View>

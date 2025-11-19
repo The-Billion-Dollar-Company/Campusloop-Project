@@ -26,6 +26,8 @@ const createItem = async (payload: Partial<IItem>, userId: string) => {
     throw new AppError(httpStatus.BAD_REQUEST, "User not found");
   }
 
+
+  // logged user er id and Post user er id same ki na.
   if (payload.ownerId.toString() !== userId) {
     throw new AppError(
       httpStatus.FORBIDDEN,
