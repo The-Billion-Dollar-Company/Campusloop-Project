@@ -10,6 +10,7 @@ router.post(
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   AdminController.updateUserStatus
 );
+
 router.get(
   "/all-items",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),

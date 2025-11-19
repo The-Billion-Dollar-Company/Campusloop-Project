@@ -8,9 +8,9 @@ export enum Role{
 }
 
 export enum Status{
-    PENDING="PENDING",
-    ACTIVE="ACTIVE",
-    SUSPEND="SUSPEND",
+    PENDING="PENDING", // by default
+    ACTIVE="ACTIVE", // Admin krte parbe
+    SUSPEND="SUSPEND", // Admin krte parbe
 }
 
 
