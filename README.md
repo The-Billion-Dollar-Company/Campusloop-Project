@@ -11,7 +11,7 @@ Welcome to **CampusLoop Mobile App**
 - Cloud: Firebase, Vercel, AWS
 
 ### 💼 Featured Projects
-- **[Campusloop](https://github.com/The-Billion-Dollar-Company/Campusloop-Project)** – A platform for students & teachers to connect, manage classes, and share updates.
+- **[Campusloop](https://github.com/The-Billion-Dollar-Company/Campusloop-Project)** - A Campus-Based Renting Platform connecting students, reducing costs, building community.
 
 ### 📫 Connect with Us
 🌐 [Website](#) | 💌 [Contact Us](mailto:mehedihasanshipat4@email.com)
