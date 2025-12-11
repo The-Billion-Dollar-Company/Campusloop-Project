@@ -1,13 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 
 const MyRental = () => {
     const router = useRouter();
   
   return (
-    <View className="items-center justify-start bg-campus-pearl p-4">
+     <View className="flex-1 items-center justify-start bg-campus-pearl p-4">
       {/* Header */}
 
       {/* Rental Card */}
@@ -17,7 +16,7 @@ const MyRental = () => {
 
         {/* Text Content */}
         <View className="flex-1">
-          <Text className="text-base font-semibold text-black">
+          <Text className="text-base font-semibold text-gray-900">
             Dji Camera
           </Text>
           <Text className="text-gray-500 mt-1">Rented Until Dec 15</Text>
