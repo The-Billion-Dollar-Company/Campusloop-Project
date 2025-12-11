@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { privateAPI } from '../lib/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { privateAPI } from "../lib/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserContext = createContext();
 
@@ -8,7 +8,7 @@ const UserContext = createContext();
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 };
@@ -25,8 +25,8 @@ export const UserProvider = ({ children }) => {
       setLoading(true);
       setError(null);
 
-      const token = await AsyncStorage.getItem('accessToken');
-      // console.log(token)
+      const token = await AsyncStorage.getItem("accessToken");
+      console.log("🔑 Token exists:", !!token); // Debug
 
       if (!token) {
         setUser(null);
@@ -34,33 +34,40 @@ export const UserProvider = ({ children }) => {
         return;
       }
 
-      const response = await privateAPI.get('/user/me');
-      // console.log(response)
-        // console.log(response)
-        // console.log(response.data)
-
+      const response = await privateAPI.get("/user/me");
+      console.log("✅ User fetched:", response.data.data); // Debug
 
       if (response.data.success) {
         setUser(response.data.data);
       } else {
-        setError('Failed to fetch user profile');
+        console.error("❌ Response not successful:", response.data.message);
+        setError("Failed to fetch user profile");
         setUser(null);
       }
     } catch (err) {
-      console.error('Error fetching user:', err);
-      setError(err.response?.data?.message || 'Failed to load user profile');
+      console.error("❌ Error fetching user:", {
+        status: err.response?.status,
+        message: err.response?.data?.message,
+        error: err.message,
+      });
+
+      // On 500 error, clear tokens (they might be corrupted)
+      if (err.response?.status === 500) {
+        await AsyncStorage.removeItem("accessToken");
+        await AsyncStorage.removeItem("refreshToken");
+      }
+
+      setError(err.response?.data?.message || "Failed to load user profile");
       setUser(null);
 
-
       if (err.response?.status === 401) {
-        await AsyncStorage.removeItem('accessToken');
-        await AsyncStorage.removeItem('refreshToken');
+        await AsyncStorage.removeItem("accessToken");
+        await AsyncStorage.removeItem("refreshToken");
       }
     } finally {
       setLoading(false);
     }
   };
-
   // Update user profile locally
   const updateUser = (userData) => {
     setUser(userData);
@@ -69,8 +76,8 @@ export const UserProvider = ({ children }) => {
   // Clear user data (logout)
   const clearUser = async () => {
     setUser(null);
-    await AsyncStorage.removeItem('accessToken');
-    await AsyncStorage.removeItem('refreshToken');
+    await AsyncStorage.removeItem("accessToken");
+    await AsyncStorage.removeItem("refreshToken");
   };
 
   // Fetch user on mount

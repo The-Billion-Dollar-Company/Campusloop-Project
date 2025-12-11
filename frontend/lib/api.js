@@ -16,7 +16,7 @@ privateAPI.interceptors.request.use(
     // console.log(token);
     // alert( token);
     if (token) {
-      config.headers.Authorization = ` ${token}`;
+      config.headers.Authorization = `${token}`;
     }
     return config;
   },

@@ -42,37 +42,48 @@ export default function ProductsScreen() {
     fetchProducts();
   }, [search, category, sellingCategory, maxPrice, sortBy, sortOrder]);
 
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+const fetchProducts = async () => {
+  try {
+    setLoading(true);
+    setError(null);
 
-      // Build query parameters
-      const params = new URLSearchParams();
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (category !== 'ALL') params.append('category', category);
+    if (sellingCategory !== 'ALL') params.append('sellingCategory', sellingCategory);
+    if (maxPrice) params.append('maxPrice', maxPrice);
+    if (sortBy) params.append('sortBy', sortBy);
+    if (sortOrder) params.append('sortOrder', sortOrder);
 
-      if (search) params.append('search', search);
-      if (category !== 'ALL') params.append('category', category);
-      if (sellingCategory !== 'ALL') params.append('sellingCategory', sellingCategory);
-      if (maxPrice) params.append('maxPrice', maxPrice);
-      if (sortBy) params.append('sortBy', sortBy);
-      if (sortOrder) params.append('sortOrder', sortOrder);
+    const endpoint = `/item?${params.toString()}`;
+    
 
-      const response = await publicAPI.get(`/item?${params.toString()}`);
+    const response = await publicAPI.get(endpoint);
 
-      if (response.data.success) {
-        setProducts(response.data.data);
-      } else {
-        setError('Failed to fetch products');
-      }
-    } catch (err) {
-      console.error('Error fetching products:', err);
-      setError(err.response?.data?.message || 'Failed to load products');
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
+
+    if (response.data.success) {
+      setProducts(response.data.data);
+    } else {
+      setError('Failed to fetch products');
     }
-  };
+  } catch (err) {
+    console.error('❌ ERROR DETAILS:');
+    console.error('   Error Code:', err.code); // e.g., ECONNREFUSED, ENOTFOUND, ERR_NETWORK
+    console.error('   Error Message:', err.message);
+    console.error('   Status Code:', err.response?.status);
+    console.error('   Request Config:', {
+      url: err.config?.url,
+      baseURL: err.config?.baseURL,
+      method: err.config?.method,
+    });
+    console.error('   Full Error:', err);
 
+    setError(err.response?.data?.message || err.message || 'Network error - backend unreachable');
+  } finally {
+    setLoading(false);
+    setRefreshing(false);
+  }
+};
   const onRefresh = () => {
     setRefreshing(true);
     fetchProducts();
