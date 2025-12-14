@@ -3,6 +3,7 @@ import "nativewind";
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import "../global.css";
 import FeaturedItemCard from '../Components/Home/FeaturedItemsCard';
+import Slider from '../Components/Slider';
 
 export default function Home() {
   return (
@@ -30,6 +31,9 @@ export default function Home() {
           </View>
         </View>
       </View>
+
+      {/* Image Slider */}
+      <Slider />
 
       {/* Content outside the green header */}
       <View className="px-6 pt-5">

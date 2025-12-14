@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Dimensions,
-  Linking,
   Alert,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -44,8 +43,20 @@ export default function ProductDetailScreen() {
   };
 
   const handleContactSeller = () => {
-    if (product?.ownerId?.email) {
-      Linking.openURL(`mailto:${product.ownerId.email}`);
+    console.log("User object:", JSON.stringify(user, null, 2));
+    console.log("Product ownerId:", product?.ownerId);
+
+    // Check which ID field exists in user object
+    const userId = user?._id || user?.id || user?.userId;
+    console.log("Resolved userId:", userId);
+
+    if (product?.ownerId?._id && userId) {
+      router.push({
+        pathname: "/screens/ChatScreen",
+        params: { buyerId: userId, sellerId: product.ownerId._id }
+      });
+    } else {
+      Alert.alert("Unable to start chat", "User information missing. User ID: " + userId + ", Seller ID: " + product?.ownerId?._id);
     }
   };
 

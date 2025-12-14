@@ -10,7 +10,6 @@ export default function Index() {
   const router = useRouter();
 
   useEffect(() => {
-    // Navigate to splash after a short delay
     const timer = setTimeout(() => {
       router.replace("/Home");
     }, 1000);
